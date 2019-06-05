@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found.component';
-import { EventRoutingModule } from './event/event-routing.module';
+import { eventRoutes } from './event/event-routing.module';
 
 const routes: Routes = [
-  { path: '',
-    redirectTo: '/events',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }
+  ...eventRoutes,
+  { path: '', redirectTo: 'events', pathMatch: 'full'},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), EventRoutingModule],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

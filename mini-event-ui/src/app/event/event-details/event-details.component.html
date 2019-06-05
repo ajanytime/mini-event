@@ -1,3 +1,14 @@
-<p>
-  event-details works!
-</p>
+<div *ngIf="event$ | async as event; else empty">
+    <div class="p-grid">
+        <div class="p-col-6">{{event?.date}}</div>
+        <div class="p-col-6">{{event?.type}}</div>
+        <div class="p-col-6">{{event?.size}}</div>
+        <div class="p-col-6">{{event?.summary}}</div>
+      </div>
+      <p-fieldset legend="Event Details" [toggleable]="true">
+        {{event?.details}}
+      </p-fieldset>
+</div>
+<ng-template #empty>
+    <div class="loading">Loading&#8230;</div>
+</ng-template>

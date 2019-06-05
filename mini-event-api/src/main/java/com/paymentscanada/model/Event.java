@@ -28,15 +28,6 @@ public class Event {
 
     public Event(){}
 
-    public Event(EventSummary summary, String details) {
-        setId(summary.getId());
-        setDate(summary.getDate());
-        setType(summary.getType());
-        setSummary(summary.getSummary());
-        setSize(summary.getSize());
-        setDetails(details);
-    }
-
     public String getId() {
         return id;
     }

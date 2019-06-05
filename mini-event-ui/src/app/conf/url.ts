@@ -1,3 +1,3 @@
 export class URL {
-    static EVENTS: string = "/api/events";
+    static EVENTS: string = "/api/v1/events";
 }

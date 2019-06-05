@@ -6,6 +6,7 @@ import com.paymentscanada.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,9 @@ import java.util.Map;
 @Component
 public class InitialLoadListener {
 
-    public static final String dataFile = "assignment_data_short.json";
+    @Value("${data.file}")
+    private String dataFile;
+
     private static final Logger logger = LoggerFactory.getLogger(InitialLoadListener.class);
 
     @Autowired

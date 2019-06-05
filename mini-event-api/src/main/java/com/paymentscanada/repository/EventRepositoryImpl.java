@@ -1,12 +1,10 @@
 package com.paymentscanada.repository;
 
 import com.paymentscanada.model.Event;
+import com.paymentscanada.model.EventDetails;
 import com.paymentscanada.model.EventSummary;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -32,10 +30,10 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public Event get(String id) {
+    public EventDetails get(String id) {
         EventSummary summary = (EventSummary) hashOperations.get(EVENT_SUMMARY, id);
         String details = (String) hashOperations.get(EVENT_DETAILS, id);
-        return new Event(summary, details);
+        return new EventDetails(summary, details);
     }
 
     @Override

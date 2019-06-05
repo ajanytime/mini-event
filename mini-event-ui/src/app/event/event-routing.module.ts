@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 
-const eventRoutes: Routes = [
+export const eventRoutes: Routes = [
   { path: 'events', component: EventListComponent },
   { path: 'events/:id', component: EventDetailsComponent }
 ];
@@ -12,4 +12,4 @@ const eventRoutes: Routes = [
   imports: [RouterModule.forChild(eventRoutes)],
   exports: [RouterModule]
 })
-export class EventRoutingModule { }
+export class EventRoutingModule {}
