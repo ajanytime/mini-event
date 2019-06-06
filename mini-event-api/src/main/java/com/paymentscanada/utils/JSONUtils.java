@@ -23,7 +23,7 @@ public final class JSONUtils {
         List<Event> events = mapper.readValue(url.openStream(), new TypeReference<List<Event>>(){});
 
         events.forEach((event -> {
-            event.setId(Hashing.murmur3_32().hashBytes(event.getDetails().getBytes()).toString());
+            event.setEventId(Hashing.murmur3_32().hashBytes(event.getDetails().getBytes()).toString());
         }));
 
         return events;

@@ -1,8 +1,8 @@
-package com.paymentscanada.model;
+package com.paymentscanada.model.command;
 
 import java.time.LocalDate;
 
-public class Command {
+public class EventCommand {
 
     private LocalDate start;
     private LocalDate end;

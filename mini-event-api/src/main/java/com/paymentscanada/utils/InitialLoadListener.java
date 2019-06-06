@@ -1,7 +1,7 @@
 package com.paymentscanada.utils;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.EventSummary;
+import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class InitialLoadListener {
     }
 
     private void init() {
-        Map<String, EventSummary> map = eventRepository.getAll();
+        Map<String, EventSummaryDTO> map = eventRepository.getAll();
         if (map == null || map.size() == 0) {
             logger.info("Data not loaded, start initial load ...");
             try {

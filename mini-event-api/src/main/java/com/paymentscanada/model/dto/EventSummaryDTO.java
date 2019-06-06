@@ -1,15 +1,17 @@
-package com.paymentscanada.model;
+package com.paymentscanada.model.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.paymentscanada.model.Event;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
 
-public class EventSummary {
+public class EventSummaryDTO extends ResourceSupport {
 
-    private String id;
+    private String eventId;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate date;
@@ -17,22 +19,22 @@ public class EventSummary {
     private String summary;
     private int size;
 
-    public EventSummary(){}
+    public EventSummaryDTO(){}
 
-    public EventSummary(Event event) {
-        setId(event.getId());
+    public EventSummaryDTO(Event event) {
+        setEventId(event.getEventId());
         setDate(event.getDate());
         setType(event.getType());
         setSummary(event.getSummary());
         setSize(event.getSize());
     }
 
-    public String getId() {
-        return id;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public LocalDate getDate() {

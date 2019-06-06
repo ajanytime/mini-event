@@ -1,15 +1,15 @@
 package com.paymentscanada.repository;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.EventDetails;
-import com.paymentscanada.model.EventSummary;
+import com.paymentscanada.model.dto.EventDetailsDTO;
+import com.paymentscanada.model.dto.EventSummaryDTO;
 
 import java.util.Map;
 
 public interface EventRepository {
 
     void save(Event event);
-    EventDetails get(String id);
-    Map<String, EventSummary> getAll();
+    EventDetailsDTO get(String eventId);
+    Map<String, EventSummaryDTO> getAll();
 
 }

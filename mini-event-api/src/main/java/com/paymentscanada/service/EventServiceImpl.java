@@ -1,8 +1,8 @@
 package com.paymentscanada.service;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.EventDetails;
-import com.paymentscanada.model.EventSummary;
+import com.paymentscanada.model.dto.EventDetailsDTO;
+import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,32 +20,40 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
     @Override
-    public List<EventSummary> find(LocalDate start, LocalDate end) {
-        // find all hashed events from redis
-        Map<String, EventSummary> map = eventRepository.getAll();
+    public List<EventSummaryDTO> find(LocalDate start, LocalDate end) {
 
-        // convert map to list
-        List<EventSummary> events = new ArrayList<>();
-        map.forEach((k, v) -> events.add(v));
+        Map<String, EventSummaryDTO> map = eventRepository.getAll();
 
-        // apply search date ranges
+        List<EventSummaryDTO> events = toListHelper(map);
+
         if (start == null && end == null) {
             return events;
         } else if (start != null && end == null) {
-            return events.stream().filter((EventSummary event) -> event.getDate().isEqual(start)).collect(Collectors.toList());
+            return events.stream().filter((EventSummaryDTO event) -> event.getDate().isEqual(start)).collect(Collectors.toList());
         } else
-            return events.stream().filter((EventSummary event) ->
+            return events.stream().filter((EventSummaryDTO event) ->
                     event.getDate().isAfter(start) && event.getDate().isBefore(end)
             ).collect(Collectors.toList());
     }
 
     @Override
-    public EventDetails get(String id) {
-        return eventRepository.get(id);
+    public EventDetailsDTO get(String eventId) {
+        return eventRepository.get(eventId);
     }
 
     @Override
     public void save(Event event) {
         eventRepository.save(event);
+    }
+
+    private List<EventSummaryDTO> toListHelper(Map<String, EventSummaryDTO> map) {
+        List<EventSummaryDTO> list = new ArrayList<>();
+        //convert to a list for UI to render
+        map.forEach((k, v) -> {
+            // had to perform this id assignment step because spring HATEOAS clashes with id field and remove its value
+            v.setEventId(k);
+            list.add(v);
+        });
+        return list;
     }
 }

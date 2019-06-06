@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class Event {
 
-    private String id;
+    private String eventId;
     @JsonProperty(value = "event_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -28,12 +28,12 @@ public class Event {
 
     public Event(){}
 
-    public String getId() {
-        return id;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public LocalDate getDate() {

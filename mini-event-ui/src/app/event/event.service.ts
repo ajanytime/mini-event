@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { URL } from '../conf/url';
 import { Event } from '../model/event.model';
@@ -17,7 +18,8 @@ export class EventService {
   }
 
   getEvents(start: Date, end: Date): Observable<Event[]> {
-    return <Observable<Event[]>>this.httpClient.post(URL.EVENTS, {start: start, end: end});
+    return <Observable<Event[]>>this.httpClient.post(URL.EVENTS, {start: start, end: end}).
+    pipe(map((data: any) => data._embedded.eventSummaryDTOList));
   }
 
 }

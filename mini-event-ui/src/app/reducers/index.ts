@@ -40,5 +40,4 @@ export const reducers: ActionReducerMap<State> = {
   eventState: eventReducer
 };
 
-
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

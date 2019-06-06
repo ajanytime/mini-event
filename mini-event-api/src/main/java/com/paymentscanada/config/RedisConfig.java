@@ -1,7 +1,6 @@
 package com.paymentscanada.config;
 
-import com.paymentscanada.model.Event;
-import com.paymentscanada.model.EventSummary;
+import com.paymentscanada.model.dto.EventSummaryDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +27,8 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, EventSummary> redisTemplate() {
-        final RedisTemplate<String, EventSummary> template = new RedisTemplate<>();
+    public RedisTemplate<String, EventSummaryDTO> redisTemplate() {
+        final RedisTemplate<String, EventSummaryDTO> template = new RedisTemplate<>();
 
         template.setConnectionFactory(jedisConnectionFactory());
         template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());

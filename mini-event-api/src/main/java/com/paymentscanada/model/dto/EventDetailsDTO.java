@@ -1,29 +1,31 @@
-package com.paymentscanada.model;
+package com.paymentscanada.model.dto;
+
+import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
 
-public class EventDetails {
+public class EventDetailsDTO extends ResourceSupport {
 
-    private EventSummary eventSummary;
+    private EventSummaryDTO eventSummary;
     private String details;
-    private String id;
+    private String eventId;
     private String type;
     private LocalDate date;
     private int size;
     private String summary;
 
-    public EventDetails(EventSummary eventSummary) {
+    public EventDetailsDTO(EventSummaryDTO eventSummary) {
         this.eventSummary = eventSummary;
-        this.setId(eventSummary.getId());
+        this.setEventId(eventSummary.getEventId());
         this.setDate(eventSummary.getDate());
         this.setType(eventSummary.getType());
         this.setSize(eventSummary.getSize());
         this.setSummary(eventSummary.getSummary());
     }
 
-    public EventDetails(EventSummary eventSummary, String details) {
+    public EventDetailsDTO(EventSummaryDTO eventSummary, String details) {
         this.eventSummary = eventSummary;
-        this.setId(eventSummary.getId());
+        this.setEventId(eventSummary.getEventId());
         this.setDate(eventSummary.getDate());
         this.setType(eventSummary.getType());
         this.setSize(eventSummary.getSize());
@@ -31,12 +33,12 @@ public class EventDetails {
         this.setDetails(details);
     }
 
-    public String getId() {
-        return id;
+    public String getEventId() {
+        return eventId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     public String getType() {
