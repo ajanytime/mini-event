@@ -1,7 +1,6 @@
 package com.paymentscanada.repository;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.dto.EventDetailsDTO;
 import com.paymentscanada.model.dto.EventSummaryDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
@@ -18,7 +17,6 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Value("${event.details.key}")
     private String EVENT_DETAILS_KEY;
-
 
     private RedisTemplate<String, EventSummaryDTO> redisTemplate;
     private HashOperations hashOperations;

@@ -1,5 +1,6 @@
 package com.paymentscanada.controller;
 
+import com.paymentscanada.config.EmbeddedRedis;
 import com.paymentscanada.model.Event;
 import com.paymentscanada.model.command.EventCommand;
 import com.paymentscanada.repository.EventRepository;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,6 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
+@TestPropertySource(locations="classpath:test.properties")
+@ContextConfiguration(classes = EmbeddedRedis.class)
 public class EventResourceTest {
 
     @Autowired

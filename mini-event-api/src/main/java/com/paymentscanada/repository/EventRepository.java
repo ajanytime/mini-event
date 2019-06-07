@@ -1,8 +1,6 @@
 package com.paymentscanada.repository;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.dto.EventDetailsDTO;
-import com.paymentscanada.model.dto.EventSummaryDTO;
 
 import java.util.Map;
 

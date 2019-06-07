@@ -19,10 +19,13 @@ public class RedisConfig {
     @Value("${spring.redis.host}")
     private String redisHost;
 
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration(redisHost, 6379);
+                new RedisStandaloneConfiguration(redisHost, redisPort);
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
 
