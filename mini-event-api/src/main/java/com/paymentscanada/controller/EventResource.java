@@ -49,13 +49,15 @@ public class EventResource {
         LocalDate start = command.getStart();
         LocalDate end = command.getEnd();
 
+        // toying with Java 8 CompletableFuture
         CompletableFuture<List<EventSummaryDTO>> summaries = eventService.find(start, end);
-        // add hyper media links
-        addDetailsLinkHelper(summaries.get());
+        List<EventSummaryDTO> completedSummaries = summaries.get();
 
+        // add hyper media links
+        addDetailsLinkHelper(completedSummaries);
         Link link = linkTo(EventResource.class).withSelfRel();
 
-        return new Resources<>(summaries.get(), link);
+        return new Resources<>(completedSummaries, link);
     }
 
     private void addDetailsLinkHelper(List<EventSummaryDTO> summaries) throws InterruptedException, ExecutionException {

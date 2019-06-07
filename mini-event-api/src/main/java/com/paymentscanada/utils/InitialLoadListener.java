@@ -1,11 +1,9 @@
 package com.paymentscanada.utils;
 
 import com.paymentscanada.model.Event;
-import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
@@ -41,12 +39,11 @@ public class InitialLoadListener {
             try {
                 URL dataUrl = InitialLoadListener.class.getClassLoader().getResource(dataFile);
                 List<Event> events = JSONUtils.fromJsonFile(dataUrl);
-                events.forEach((event -> {
-                    eventRepository.save(event);
-                }));
+                eventRepository.load(events);
                 logger.info("Done ...");
+                logger.info("Please access UI at http://localhost:9090 ");
             } catch (Exception e) {
-                logger.error("Error occured while loading initial data ...");
+                logger.error("Error occurred while loading initial data ...");
                 e.printStackTrace();
             }
 
