@@ -9,7 +9,8 @@ import java.util.Map;
 public interface EventRepository {
 
     void save(Event event);
-    EventDetailsDTO get(String eventId);
-    Map<String, EventSummaryDTO> getAll();
+    Event get(String eventId);
+    Map<String, Event> getAll();
+    void deleteAll();
 
 }

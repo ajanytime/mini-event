@@ -1,5 +1,6 @@
 package com.paymentscanada.model.dto;
 
+import com.paymentscanada.model.Event;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
@@ -14,23 +15,15 @@ public class EventDetailsDTO extends ResourceSupport {
     private int size;
     private String summary;
 
-    public EventDetailsDTO(EventSummaryDTO eventSummary) {
-        this.eventSummary = eventSummary;
-        this.setEventId(eventSummary.getEventId());
-        this.setDate(eventSummary.getDate());
-        this.setType(eventSummary.getType());
-        this.setSize(eventSummary.getSize());
-        this.setSummary(eventSummary.getSummary());
-    }
+    public EventDetailsDTO() {}
 
-    public EventDetailsDTO(EventSummaryDTO eventSummary, String details) {
-        this.eventSummary = eventSummary;
-        this.setEventId(eventSummary.getEventId());
-        this.setDate(eventSummary.getDate());
-        this.setType(eventSummary.getType());
-        this.setSize(eventSummary.getSize());
-        this.setSummary(eventSummary.getSummary());
-        this.setDetails(details);
+    public EventDetailsDTO(Event event) {
+        this.setEventId(event.getEventId());
+        this.setDate(event.getDate());
+        this.setType(event.getType());
+        this.setSize(event.getSize());
+        this.setSummary(event.getSummary());
+        this.setDetails(event.getDetails());
     }
 
     public String getEventId() {

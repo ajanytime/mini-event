@@ -22,9 +22,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventSummaryDTO> find(LocalDate start, LocalDate end) {
 
-        Map<String, EventSummaryDTO> map = eventRepository.getAll();
+        Map<String, Event> map = eventRepository.getAll();
 
-        List<EventSummaryDTO> events = toListHelper(map);
+        List<EventSummaryDTO> events = this.toListHelper(map);
 
         if (start == null && end == null) {
             return events;
@@ -38,7 +38,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDetailsDTO get(String eventId) {
-        return eventRepository.get(eventId);
+        return new EventDetailsDTO(eventRepository.get(eventId));
     }
 
     @Override
@@ -46,13 +46,13 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
-    private List<EventSummaryDTO> toListHelper(Map<String, EventSummaryDTO> map) {
+    private List<EventSummaryDTO> toListHelper(Map<String, Event> map) {
         List<EventSummaryDTO> list = new ArrayList<>();
         //convert to a list for UI to render
         map.forEach((k, v) -> {
             // had to perform this id assignment step because spring HATEOAS clashes with id field and remove its value
             v.setEventId(k);
-            list.add(v);
+            list.add(new EventSummaryDTO(v));
         });
         return list;
     }

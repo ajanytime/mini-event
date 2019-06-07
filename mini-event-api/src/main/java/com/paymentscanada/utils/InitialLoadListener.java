@@ -23,8 +23,11 @@ public class InitialLoadListener {
 
     private static final Logger logger = LoggerFactory.getLogger(InitialLoadListener.class);
 
-    @Autowired
     private EventRepository eventRepository;
+
+    public InitialLoadListener(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     @EventListener
     public void onApplicationEvent(ContextStartedEvent event) {
@@ -32,12 +35,12 @@ public class InitialLoadListener {
     }
 
     private void init() {
-        Map<String, EventSummaryDTO> map = eventRepository.getAll();
+        Map<String, Event> map = eventRepository.getAll();
         if (map == null || map.size() == 0) {
             logger.info("Data not loaded, start initial load ...");
             try {
                 URL dataUrl = InitialLoadListener.class.getClassLoader().getResource(dataFile);
-                List<Event> events = JSONUtils.fromJson(dataUrl);
+                List<Event> events = JSONUtils.fromJsonFile(dataUrl);
                 events.forEach((event -> {
                     eventRepository.save(event);
                 }));
@@ -45,7 +48,6 @@ public class InitialLoadListener {
             } catch (Exception e) {
                 logger.error("Error occured while loading initial data ...");
                 e.printStackTrace();
-
             }
 
         }

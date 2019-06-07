@@ -4,12 +4,12 @@ import com.paymentscanada.model.command.EventCommand;
 import com.paymentscanada.model.dto.EventDetailsDTO;
 import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.service.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,17 +17,22 @@ import java.util.List;
 // had to make do with this implementation for now as spring HATEOAS is buggy
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+
 @RestController
 @RequestMapping("/api/v1/events")
 @CrossOrigin
 public class EventResource {
 
-    @Autowired
-    EventService eventService;
+    private EventService eventService;
+
+    public EventResource(EventService eventService) {
+        this.eventService = eventService;
+    }
 
     @GetMapping(path = "/{eventId}", produces = {"application/hal+json"})
     public Resource<EventDetailsDTO> get(@PathVariable String eventId) {
         EventDetailsDTO event = eventService.get(eventId);
+        //add hyper links
         event.add(linkTo(ControllerLinkBuilder.methodOn(this.getClass()).get(eventId)).withRel("target_url"));
         return new Resource<>(event);
     }
@@ -47,6 +52,6 @@ public class EventResource {
 
         Link link = linkTo(EventResource.class).withSelfRel();
 
-        return new Resources<EventSummaryDTO>(summaries, link);
+        return new Resources<>(summaries, link);
     }
 }

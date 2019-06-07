@@ -19,7 +19,12 @@ export class EventService {
 
   getEvents(start: Date, end: Date): Observable<Event[]> {
     return <Observable<Event[]>>this.httpClient.post(URL.EVENTS, {start: start, end: end}).
-    pipe(map((data: any) => data._embedded.eventSummaryDTOList));
+    pipe(map((data: any) => {
+      if(!!data && !!data._embedded) {
+        return data._embedded.eventSummaryDTOList;
+      }
+      return [];
+    }));
   }
 
 }

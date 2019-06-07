@@ -6,11 +6,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.paymentscanada.model.dto.EventSummaryDTO;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.time.LocalDate;
 
 public class Event {
 
+    @Indexed
     private String eventId;
     @JsonProperty(value = "event_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -27,6 +30,23 @@ public class Event {
     private String details;
 
     public Event(){}
+
+    public Event(EventSummaryDTO summary) {
+        setEventId(summary.getEventId());
+        setDate(summary.getDate());
+        setType(summary.getType());
+        setSize(summary.getSize());
+        setSummary(summary.getSummary());
+    }
+
+    public Event(EventSummaryDTO summary, String details) {
+        setEventId(summary.getEventId());
+        setDate(summary.getDate());
+        setType(summary.getType());
+        setSize(summary.getSize());
+        setSummary(summary.getSummary());
+        setDetails(details);
+    }
 
     public String getEventId() {
         return eventId;

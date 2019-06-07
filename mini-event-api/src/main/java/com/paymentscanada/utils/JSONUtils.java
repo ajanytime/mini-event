@@ -1,6 +1,7 @@
 package com.paymentscanada.utils;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public final class JSONUtils {
 
-    public static List<Event> fromJson(URL url) throws IOException {
+    public static List<Event> fromJsonFile(URL url) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -28,4 +29,16 @@ public final class JSONUtils {
 
         return events;
     }
+
+    public static String toJson(Object obj) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(obj);
+    }
+
+    public static  <T> T fromJson(String json, Class<T> clazz)
+            throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, clazz);
+    }
+
 }
