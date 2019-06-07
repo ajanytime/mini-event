@@ -33,6 +33,11 @@ public class EventRepositoryImpl implements EventRepository {
         hashOperations.put(EVENT_SUMMARY_KEY, event.getEventId(), event);
     }
 
+    /**
+     * This method could have been deprecated after adding
+     * async rest controller support, but we are keeping it for now
+     * to support test cases
+     * */
     @Override
     public Event get(String eventId) {
         Event event = (Event) hashOperations.get(EVENT_SUMMARY_KEY, eventId);
@@ -41,6 +46,16 @@ public class EventRepositoryImpl implements EventRepository {
             event.setDetails(details);
         }
         return event;
+    }
+
+    @Override
+    public String getDetails(String eventId) {
+        return (String) hashOperations.get(EVENT_DETAILS_KEY, eventId);
+    }
+
+    @Override
+    public Event getSummary(String eventId) {
+        return (Event) hashOperations.get(EVENT_SUMMARY_KEY, eventId);
     }
 
     @Override

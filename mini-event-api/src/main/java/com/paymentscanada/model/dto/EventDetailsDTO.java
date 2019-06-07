@@ -26,6 +26,15 @@ public class EventDetailsDTO extends ResourceSupport {
         this.setDetails(event.getDetails());
     }
 
+    public EventDetailsDTO(EventSummaryDTO summary, String details) {
+        this.setEventId(summary.getEventId());
+        this.setDate(summary.getDate());
+        this.setType(summary.getType());
+        this.setSize(summary.getSize());
+        this.setSummary(summary.getSummary());
+        this.setDetails(details);
+    }
+
     public String getEventId() {
         return eventId;
     }

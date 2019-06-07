@@ -4,13 +4,17 @@ import com.paymentscanada.model.Event;
 import com.paymentscanada.model.dto.EventDetailsDTO;
 import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.repository.EventRepository;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+
+import static com.paymentscanada.config.AsyncConfig.ASYNC_EXECUTOR_SERVICE_LAYER;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -38,6 +42,23 @@ public class EventServiceImpl implements EventService {
             ).collect(Collectors.toList());
     }
 
+    @Async(ASYNC_EXECUTOR_SERVICE_LAYER)
+    @Override
+    public CompletableFuture<EventSummaryDTO> getSummary(String eventId) throws InterruptedException {
+        return CompletableFuture.completedFuture(new EventSummaryDTO(eventRepository.getSummary(eventId)));
+    }
+
+    @Async(ASYNC_EXECUTOR_SERVICE_LAYER)
+    @Override
+    public CompletableFuture<String> getDetails(String eventId) throws InterruptedException {
+        return CompletableFuture.completedFuture(eventRepository.getDetails(eventId));
+    }
+
+    /**
+     * This method could have been deprecated after adding
+     * async rest controller support, but we are keeping it for now
+     * to support test cases
+     * */
     @Override
     public EventDetailsDTO get(String eventId) {
         return new EventDetailsDTO(eventRepository.get(eventId));

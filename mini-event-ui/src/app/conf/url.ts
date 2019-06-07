@@ -1,3 +1,3 @@
 export class URL {
-    static EVENTS: string = "/api/v1/events";
+    static EVENTS: string = "http://localhost:8080/api/v1/events";
 }
