@@ -7,6 +7,7 @@ import redis.embedded.RedisServer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+
 @TestConfiguration
 public class EmbeddedRedis {
 

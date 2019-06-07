@@ -1,7 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
+<nav class="navbar fixed-top bd-navbar">
+    <p class="navbar-brand mb-0 h1" href="#">{{ title }}</p>
+    <button (click)="back()" class="btn btn-primary btn-sm pull-right">BACK</button>
+</nav>
+<div class="container" style="margin-top: 5%">
+    <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
+

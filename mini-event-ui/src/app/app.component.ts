@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MINI EVENT APP';
+  title = 'EVENT APP';
+
+  constructor(protected location: Location) {}
+
+  back() {
+    this.location.back();
+  }
+
 }

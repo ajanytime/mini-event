@@ -1,42 +1,54 @@
 <div *ngIf="events$ | async as events; else empty">
-  <div class="ui-g ui-fluid">
-    <form [formGroup]="searchForm">
-      <div class="ui-g-6">
-        <p-calendar selectionMode="range" placeholder="Please select a range of dates" dateFormat="yy-mm-dd"
-          showWeek="true" monthNavigator="true" yearNavigator="true" yearRange="1970:2030" formControlName="dateRange">
-        </p-calendar>
+  <main>
+    <section>
+      <div class="container">
+        <form [formGroup]="searchForm">
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-10 pull-right">
+              <p-calendar selectionMode="range" placeholder="Click here to select a range of dates" dateFormat="yy-mm-dd"
+                showWeek="true" monthNavigator="true" yearNavigator="true" yearRange="1970:2030"
+                formControlName="dateRange">
+              </p-calendar>
+            </div>
+            <div class="ui-g-12 ui-md-2 pull-right">
+              <button type="button" class="btn btn-primary btn-sm pull-right" type="submit"
+                (click)="onSubmit()">Search</button>
+              <button type="button" class="btn btn-link btn-sm pull-right" type="reset" (click)="reset()">Reset</button>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="ui-g-6">
-        <button class="pull-right" type="submit" (click)="onSubmit()">Search</button>
-        <button class="pull-right" type="reset" (click)="reset()">Reset</button>
+    </section>
+    <section>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-12 ">
+          <p-table [value]="events$ | async" [paginator]="true" [rows]="25">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="pull-left">DATE</th>
+                <th class="pull-left">TYPE</th>
+                <th class="pull-left">SIZE</th>
+                <th class="pull-left">SUMMARY</th>
+                <th class="pull-left">Details</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-event>
+              <tr>
+                <td>{{event.date}}</td>
+                <td>{{event.type}}</td>
+                <td>{{event.size}}</td>
+                <td>{{event.summary}}</td>
+                <td>
+                  <a [routerLink]="['/events', event.eventId]">Details</a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
       </div>
-    </form>
-  </div>
-  <div>
-    <p-table [value]="events$ | async" [paginator]="true" [rows]="25">
-      <ng-template pTemplate="header">
-        <tr>
-          <th class="pull-left">DATE</th>
-          <th class="pull-left">TYPE</th>
-          <th class="pull-left">SIZE</th>
-          <th class="pull-left">SUMMARY</th>
-          <th class="pull-left">Details</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-event>
-        <tr>
-          <td>{{event.date}}</td>
-          <td>{{event.type}}</td>
-          <td>{{event.size}}</td>
-          <td>{{event.summary}}</td>
-          <td>
-            <a [routerLink]="['/events', event.eventId]">Details</a>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    </section>
+  </main>
 </div>
 <ng-template #empty>
-    <div class="loading">Loading&#8230;</div>
+  <div class="loading">Loading&#8230;</div>
 </ng-template>

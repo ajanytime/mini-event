@@ -4,7 +4,6 @@ import com.paymentscanada.model.Event;
 import com.paymentscanada.model.dto.EventDetailsDTO;
 import com.paymentscanada.model.dto.EventSummaryDTO;
 import com.paymentscanada.repository.EventRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,8 +15,11 @@ import java.util.stream.Collectors;
 @Service
 public class EventServiceImpl implements EventService {
 
-    @Autowired
     private EventRepository eventRepository;
+
+    public EventServiceImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     @Override
     public List<EventSummaryDTO> find(LocalDate start, LocalDate end) {
