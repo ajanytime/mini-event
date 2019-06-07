@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -46,36 +48,36 @@ public class EventServiceTest {
     }
 
     @Test
-    public void testFindWithOnlyStartDate() {
+    public void testFindWithOnlyStartDate() throws InterruptedException, ExecutionException {
         LocalDate start = LocalDate.of(2011, Month.JANUARY, 1);
-        List<EventSummaryDTO> events = eventService.find(start, null);
-        assertNotNull(events);
-        assertEquals(1, events.size());
+        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, null);
+        assertNotNull(events.get());
+        assertEquals(1, events.get().size());
     }
 
     @Test
-    public void testFindWithBothStartAndEndDate() {
+    public void testFindWithBothStartAndEndDate() throws InterruptedException, ExecutionException  {
         LocalDate start = LocalDate.of(2011, Month.JANUARY, 1);
         LocalDate end = LocalDate.of(2014, Month.DECEMBER, 1);
-        List<EventSummaryDTO> events = eventService.find(start, end);
-        assertNotNull(events);
-        assertEquals(3, events.size());
+        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, end);
+        assertNotNull(events.get());
+        assertEquals(3, events.get().size());
     }
 
     @Test
-    public void testFindWithOutOfRangeDates() {
+    public void testFindWithOutOfRangeDates() throws InterruptedException, ExecutionException {
         LocalDate start = LocalDate.of(2019, Month.JANUARY, 1);
         LocalDate end = LocalDate.of(2020, Month.DECEMBER, 1);
-        List<EventSummaryDTO> events = eventService.find(start, end);
-        assertNotNull(events);
-        assertEquals(0, events.size());
+        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, end);
+        assertNotNull(events.get());
+        assertEquals(0, events.get().size());
     }
 
     @Test
-    public void testFindWithNullStartNullEnd() {
-        List<EventSummaryDTO> events = eventService.find(null, null);
-        assertNotNull(events);
-        assertEquals(5, events.size());
+    public void testFindWithNullStartNullEnd() throws InterruptedException, ExecutionException {
+        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(null, null);
+        assertNotNull(events.get());
+        assertEquals(5, events.get().size());
     }
 
 
