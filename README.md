@@ -39,36 +39,36 @@
 
 ## Before Installation
 
-1: Make sure you have below software installed,
+### 1: Make sure you have below software installed
  - docker
  - docker-compose 
  - git
  - JDK 8
  
-2: This application makes use of port, 8080, 9090, please make sure these ports are free before proceeding with installation.
+### 2: This application makes use of port, 8080, 9090, please make sure these ports are free before proceeding with installation.
 
 
 ## Installation Steps
 
-step 1,
+### Step 1,
 
 git clone https://github.com/ajanytime/mini-event.git
 
-step 2,
+### Step 2,
 
 copy data file to  ${your workspace}/mini_event/mini-event-api/src/main/resources/
 (data file is currently named as 'assignment_data_full.json', to change data file name, open application.properties and modify value 'data.file')
 
-step 3,
+### Step 3,
 
-Unix/Linux/MacOS
+**Unix/Linux/MacOS**
 1: ./run.sh  
-2: use http://localhost:9090 to access UI once done.
+2: use (http://localhost:9090) to access UI once done.
 
-Windows
+**Windows**
 1: run gradlew.bat clean build 
 2: docker-compose up
-3: use http://localhost:9090 to access UI once done.
+3: use (http://localhost:9090) to access UI once done.
 
 
 Cheers.
