@@ -1,4 +1,4 @@
-# This is the repository for a coding interview
+# This is a repository for a coding interview
 
 ## Features implemented
 
@@ -28,13 +28,13 @@
 
 ## Design Approach
 
-- use Redis for fast data retrieval
-- break Event object into summary and details (the 65000 character long string)
-- store summary and details in separate redis hash
-- enable gzip to fast transport long text (65000 characters zipped into 80k)
-- search only the summaries (small and light)
-- fetch details long text only in details view
-- rely on PrimeNG UI components to provide fontend pagination and date range search
+- Use Redis for fast data retrieval
+- Break Event object into summary and details (the 65000 character long string)
+- Store summary and details in separate redis hash
+- Enable gzip to fast transport long text (65000 characters zipped into 80k)
+- Search only the summaries (small and light)
+- Fetch details long text only in details view
+- Rely on PrimeNG UI components to provide fontend pagination and date range search
 
 
 ## Before Installation
