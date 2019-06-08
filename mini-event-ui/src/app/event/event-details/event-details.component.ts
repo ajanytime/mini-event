@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { LoadEvent } from 'src/app/actions/event.actions';
+import { ToggleIsMainPage } from 'src/app/actions/page.actions';
 
 @Component({
   selector: 'app-event-details',
@@ -26,6 +27,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let id: string = params['id'];
+      this.store.dispatch(new ToggleIsMainPage(false));
       this.store.dispatch(new LoadEvent({id: id}));
     });
   }

@@ -6,6 +6,7 @@ import { LoadEvents } from 'src/app/actions/event.actions';
 import { State } from 'src/app/reducers';
 import { Event } from '../../model/event.model';
 import { EventService } from '../event.service';
+import { ToggleIsMainPage } from 'src/app/actions/page.actions';
 
 @Component({
   selector: 'app-event-list',
@@ -26,6 +27,7 @@ export class EventListComponent implements OnInit {
     protected store: Store<State>) { }
 
   ngOnInit() {
+    this.store.dispatch(new ToggleIsMainPage(true));
     this.store.dispatch(new LoadEvents({ start: null, end: null }));
   }
 
