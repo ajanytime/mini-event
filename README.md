@@ -50,25 +50,23 @@
 
 ## Installation Steps
 
-### Step 1,
-
+### 1. 
 git clone https://github.com/ajanytime/mini-event.git
 
-### Step 2,
-
+### 2. 
 copy data file to  ${your workspace}/mini_event/mini-event-api/src/main/resources/
 (data file is currently named as 'assignment_data_full.json', to change data file name, open application.properties and modify value 'data.file')
 
-### Step 3,
+### 3.
 
 **Unix/Linux/MacOS**
-1: ./run.sh  
-2: use (http://localhost:9090) to access UI once done.
+1. ./run.sh  
+2. use (http://localhost:9090) to access UI once done.
 
 **Windows**
-1: run gradlew.bat clean build 
-2: docker-compose up
-3: use (http://localhost:9090) to access UI once done.
+1. run gradlew.bat clean build 
+2. docker-compose up
+3. use (http://localhost:9090) to access UI once done.
 
 
 Cheers.
