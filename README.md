@@ -44,20 +44,21 @@
  - docker-compose 
  - git
  - JDK 8
+ - Node 8.6+
  
 ### 2: This application makes use of port, 8080, 9090, please make sure these ports are free before proceeding with installation.
 
 
 ## Installation Steps
 
-### 1. 
+### Step 1. 
 git clone https://github.com/ajanytime/mini-event.git
 
-### 2. 
+### Step 2. 
 copy data file to  ${your workspace}/mini_event/mini-event-api/src/main/resources/
 (data file is currently named as 'assignment_data_full.json', to change data file name, open application.properties and modify value 'data.file')
 
-### 3.
+### Step 3.
 
 **Unix/Linux/MacOS**
 1. ./run.sh  
