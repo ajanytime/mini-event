@@ -72,4 +72,5 @@ git clone https://github.com/ajanytime/mini-event.git
 3. use (http://localhost:9090) to access UI once done.
 
 
-Cheers.
+
+**Go Raptors Go !**
