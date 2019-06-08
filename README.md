@@ -1,6 +1,6 @@
-This is the repository for a coding interview.
+# This is the repository for a coding interview.
 
-Features implemented,
+## Features implemented,
 
 - Dockerization with docker compose
 - Spring Boot 2
@@ -16,7 +16,7 @@ Features implemented,
 - PrimeNG style UI components to use date range
 - initial data load with multiple threads
 
-Features that could have been implemented,
+## Features that could have been implemented,
 
 - UI test cases
 - TestContainers to ease testing
@@ -26,7 +26,7 @@ Features that could have been implemented,
 - Angular Interceptor to handle status code like 500, 404, 400
 - lazy loading of search results with limit and offset
 
-Design Approach
+## Design Approach
 
 - use Redis for fast data retrieval
 - break Event object into summary and details (the 65000 character long string)
@@ -37,7 +37,7 @@ Design Approach
 - rely on PrimeNG UI components to provide fontend pagination and date range search
 
 
-Before Installation,
+## Before Installation,
 
 1: Make sure you have below software installed,
  - docker
@@ -48,7 +48,7 @@ Before Installation,
 2: This application makes use of port, 8080, 9090, please make sure these ports are free before proceeding with installation.
 
 
-Installation Steps,
+## Installation Steps,
 
 step 1,
 
