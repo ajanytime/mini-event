@@ -50,34 +50,34 @@ public class EventServiceTest {
     @Test
     public void testFindWithOnlyStartDate() throws InterruptedException, ExecutionException {
         LocalDate start = LocalDate.of(2011, Month.JANUARY, 1);
-        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, null);
-        assertNotNull(events.get());
-        assertEquals(1, events.get().size());
+        List<EventSummaryDTO> events = eventService.find(start, null);
+        assertNotNull(events);
+        assertEquals(1, events.size());
     }
 
     @Test
     public void testFindWithBothStartAndEndDate() throws InterruptedException, ExecutionException  {
         LocalDate start = LocalDate.of(2011, Month.JANUARY, 1);
         LocalDate end = LocalDate.of(2014, Month.DECEMBER, 1);
-        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, end);
-        assertNotNull(events.get());
-        assertEquals(3, events.get().size());
+        List<EventSummaryDTO> events = eventService.find(start, end);
+        assertNotNull(events);
+        assertEquals(3, events.size());
     }
 
     @Test
     public void testFindWithOutOfRangeDates() throws InterruptedException, ExecutionException {
         LocalDate start = LocalDate.of(2019, Month.JANUARY, 1);
         LocalDate end = LocalDate.of(2020, Month.DECEMBER, 1);
-        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(start, end);
-        assertNotNull(events.get());
-        assertEquals(0, events.get().size());
+        List<EventSummaryDTO> events = eventService.find(start, end);
+        assertNotNull(events);
+        assertEquals(0, events.size());
     }
 
     @Test
     public void testFindWithNullStartNullEnd() throws InterruptedException, ExecutionException {
-        CompletableFuture<List<EventSummaryDTO>> events = eventService.find(null, null);
-        assertNotNull(events.get());
-        assertEquals(5, events.get().size());
+        List<EventSummaryDTO> events = eventService.find(null, null);
+        assertNotNull(events);
+        assertEquals(5, events.size());
     }
 
 

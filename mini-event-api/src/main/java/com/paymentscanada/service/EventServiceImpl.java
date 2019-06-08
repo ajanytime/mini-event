@@ -25,12 +25,21 @@ public class EventServiceImpl implements EventService {
         this.eventRepository = eventRepository;
     }
 
-    @Async(ASYNC_EXECUTOR_SERVICE_LAYER)
     @Override
-    public CompletableFuture<List<EventSummaryDTO>> find(LocalDate start, LocalDate end) {
+    public List<EventSummaryDTO> find(LocalDate start, LocalDate end) {
+
         Map<String, Event> map = eventRepository.getAll();
+
         List<EventSummaryDTO> events = this.toListHelper(map);
-        return CompletableFuture.completedFuture(this.searchHelper(events, start, end));
+
+        if (start == null && end == null) {
+            return events;
+        } else if (start != null && end == null) {
+            return events.stream().filter((EventSummaryDTO event) -> event.getDate().isEqual(start)).collect(Collectors.toList());
+        } else
+            return events.stream().filter((EventSummaryDTO event) ->
+                    event.getDate().isAfter(start) && event.getDate().isBefore(end)
+            ).collect(Collectors.toList());
     }
 
     @Async(ASYNC_EXECUTOR_SERVICE_LAYER)
@@ -58,17 +67,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public void save(Event event) {
         eventRepository.save(event);
-    }
-
-    private List<EventSummaryDTO> searchHelper(List<EventSummaryDTO> events, LocalDate start, LocalDate end) {
-        if (start == null && end == null) {
-            return events;
-        } else if (start != null && end == null) {
-            return events.stream().filter((EventSummaryDTO event) -> event.getDate().isEqual(start)).collect(Collectors.toList());
-        } else
-            return events.stream().filter((EventSummaryDTO event) ->
-                    event.getDate().isAfter(start) && event.getDate().isBefore(end)
-            ).collect(Collectors.toList());
     }
 
     private List<EventSummaryDTO> toListHelper(Map<String, Event> map) {

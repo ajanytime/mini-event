@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 public interface EventService {
 
-    CompletableFuture<List<EventSummaryDTO>> find(LocalDate start, LocalDate end);
+    List<EventSummaryDTO> find(LocalDate start, LocalDate end);
     CompletableFuture<EventSummaryDTO> getSummary(String eventId) throws InterruptedException;
     CompletableFuture<String> getDetails(String eventId) throws InterruptedException;
     EventDetailsDTO get(String eventId);
