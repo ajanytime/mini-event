@@ -6,7 +6,6 @@
 - Spring Boot 2
 - Layered code
 - Stateless application to ease scaling
-- Toyed with Spring Boot's async capabilities, little impact on code readability
 - Hyper Media enabled Restful service using Spring HATEOAS, again little imapct on code readibility
 - Redis as fast database given the scope of the assignment
 - Angular UI with NGRX store and effects
