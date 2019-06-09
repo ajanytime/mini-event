@@ -14,7 +14,6 @@
 - UI and API talks through reverse proxy (written in ngnix.conf)
 - enable gzip in ngnix to fast transport the long string (65000 characters long)
 - PrimeNG style UI components to use date range
-- initial data load with multiple threads
 
 ## Features that could have been implemented
 
