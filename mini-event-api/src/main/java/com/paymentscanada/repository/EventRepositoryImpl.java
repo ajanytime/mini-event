@@ -2,8 +2,6 @@ package com.paymentscanada.repository;
 
 import com.paymentscanada.model.Event;
 import com.paymentscanada.model.dto.EventSummaryDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,12 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-
-import static com.paymentscanada.config.AsyncConfig.ASYNC_EXECUTOR_REPOSITORY_LAYER;
 
 @Repository
 public class EventRepositoryImpl implements EventRepository {
@@ -26,11 +18,6 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Value("${event.details.key}")
     private String EVENT_DETAILS_KEY;
-
-    //todo really not a big fan of auto wired, refactor candidate ....
-    @Autowired
-    @Qualifier(ASYNC_EXECUTOR_REPOSITORY_LAYER)
-    private ExecutorService executorService;
 
     private RedisTemplate<String, EventSummaryDTO> redisTemplate;
     private HashOperations hashOperations;
@@ -78,12 +65,8 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void load(List<Event> events) throws InterruptedException {
-        //todo speed it up a bit with multi threads
-        executorService.invokeAll(events.stream()
-                .map(event -> Executors.callable( () -> save(event)))
-                .collect(Collectors.toList()));
-        executorService.shutdown();
+    public void load(List<Event> events) {
+        events.forEach((event) ->  save(event));
     }
 
     @Override
