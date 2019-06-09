@@ -1,12 +1,11 @@
 # This is a repository for a coding interview
 
-## Features implemented
+## Features Implemented
 
 - Dockerization with docker compose
 - Spring Boot 2
 - Layered code
 - Stateless application to ease scaling
-- Toyed with Spring Boot's async capabilities, little impact on code readability
 - Hyper Media enabled Restful service using Spring HATEOAS, again little imapct on code readibility
 - Redis as fast database given the scope of the assignment
 - Angular UI with NGRX store and effects
@@ -14,7 +13,6 @@
 - UI and API talks through reverse proxy (written in ngnix.conf)
 - enable gzip in ngnix to fast transport the long string (65000 characters long)
 - PrimeNG style UI components to use date range
-- initial data load with multiple threads
 
 ## Features that could have been implemented
 
@@ -36,6 +34,15 @@
 - Fetch details long text only in details view
 - Rely on PrimeNG UI components to provide fontend pagination and date range search
 
+## Libraries and Tools
+
+- SpringBoot 2.15
+- Angular 8.0.0
+- NGRX Store/Effects
+- PrimeNG 8.0.0-rc.1
+- Redis-alpine
+- OpenJDK 8
+- Docker & Docker-Compose
 
 ## Before Installation
 
