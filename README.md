@@ -35,6 +35,15 @@
 - Fetch details long text only in details view
 - Rely on PrimeNG UI components to provide fontend pagination and date range search
 
+## Libraries and Tools
+
+- SpringBoot 2.15
+- Angular 8.0.0
+- NGRX Store/Effects
+- PrimeNG 8.0.0-rc.1
+- Redis-alpine
+- OpenJDK 8
+- Docker & Docker-Compose
 
 ## Before Installation
 
