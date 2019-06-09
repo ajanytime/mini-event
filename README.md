@@ -1,6 +1,6 @@
 # This is a repository for a coding interview
 
-## Features implemented
+## Features Implemented
 
 - Dockerization with docker compose
 - Spring Boot 2
